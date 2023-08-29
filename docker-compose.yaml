@@ -1,0 +1,14 @@
+services:
+  python_datetime_generator:
+    container_name: python_datetime_generator
+    build:
+      dockerfile: Dockerfile
+      args:
+        - CUSTOM_UID
+        - CUSTOM_GID
+    entrypoint:
+      - tail
+      - -f
+      - /dev/null
+    volumes:
+      - .:/app
