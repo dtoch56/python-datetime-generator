@@ -1,0 +1,73 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Python datetime_generator package
+  COMPOSE_FILES: docker-compose.yaml
+  CONTAINER_NAME: python_name_generator
+  UID: $(id -u)
+  GID: $(id -g)
+  IN_DOCKER: docker exec -it {{.CONTAINER_NAME}}
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+
+#  # Docker
+#  up:
+#    desc: >
+#      Start docker-compose stack
+#    cmds:
+#      - CUSTOM_UID={{.UID}} CUSTOM_GID={{.GID}} docker-compose up -d --build
+#      - docker-compose ps
+#  ps:
+#    desc: >
+#      Start docker-compose stack
+#    cmds:
+#      - docker-compose ps
+#  exec:
+#    desc: >
+#      Enter main container
+#    cmds:
+#      -  bash
+#  d:
+#    desc: >
+#      Stock docker-compose stack
+#    cmds:
+#      - docker-compose down --remove-orphans -v
+
+  # Application
+  up:
+    desc: start virtual environment
+    cmds:
+      - poetry shell
+  i:
+    desc: Install python dependencies
+    cmds:
+      - poetry install
+  u:
+    desc: Update python dependencies
+    cmds:
+      - poetry self update
+      - poetry update
+  build:
+    desc: >
+      Build the package
+    cmds:
+      - poetry build
+  publish:
+    desc: >
+      Upload the contents of the dist folder to PyPi
+    cmds:
+      - poetry publish
+  publish-test:
+    desc: >
+      Upload the contents of the dist folder to Test PyPi
+      pip install --index-url "https://test.pypi.org/simple/<package_name>"
+    cmds:
+      - poetry publish --repository test.pypi.org
+
+  # Others

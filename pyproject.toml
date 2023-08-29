@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "dtoch-datetime-generator"
+version = "0.0.1"
+description = "Python random date and datetime generator"
+license = "MIT"
+authors = [
+    "DToch56 <dtoch.56@gmail.com>"
+]
+repository = "https://github.com/dtoch56/python-datetime-generator"
+keywords = ["python", "generator", "date", "datetime"]
+readme = "README.md"
+packages = [{include = "datetime_generator"}]
+
+
+[tool.poetry.dependencies]
+python = "^3.11"
+python-dateutil = "^2.8.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+

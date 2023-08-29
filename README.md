@@ -1,1 +1,1 @@
-# python-datetime-generator
+# Python datetime generator
